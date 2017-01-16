@@ -33,7 +33,7 @@ module Sorted
           html_options = args[3] || {}
         end
 
-        sorter          = ::Sorted::ActionView::Builder.new(order, ((request.get? && !params.nil?) ? params.dup : {}))
+        sorter          = ::Sorted::ActionView::Builder.new(order, ((request.get? && !params.nil?) ? params.dup.permit! : {}))
         options[:class] = [options[:class], sorter.css].join(' ').strip
         link_to(url_for(sorter.params), options, html_options, &block)
       end
